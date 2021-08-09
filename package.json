@@ -1,0 +1,37 @@
+{
+  "name": "Periscope-AI",
+  "version": "1.0.0",
+  "description": "[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)",
+  "main": "server.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manchukonda/Periscope-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "contributors": [
+    "Aweda Adeola",
+    "Danny Kim",
+    "Harish Kumar",
+    "Jaiswal Felipe",
+    "Richard Iwenor"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manchukonda/Periscope-AI/issues"
+  },
+  "homepage": "https://github.com/Manchukonda/Periscope-AI#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
