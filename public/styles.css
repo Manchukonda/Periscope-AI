@@ -1,0 +1,176 @@
+:root {
+
+  /* Some estimation included */
+  --nav-height: 3rem;
+  --hero-mt: 1rem;
+  --hero-height: 55vh;
+
+  font-size: 16px;
+  font-family: 'Roboto Condensed', 'Times New Roman', Times, serif, sans-serif;
+}
+
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.logo {
+  height: 2em;
+}
+
+nav.banksman {
+  background-color: #ffa500;
+}
+
+nav.operator {
+  background-color: darkblue;
+}
+
+nav svg {
+  vertical-align: text-bottom;
+}
+nav h1 {
+  display: inline-block;
+  margin-bottom: 0;
+
+  font-size: calc(1rem + 0.5vw);
+  line-height: 2rem;
+}
+h2 {
+  font-size: calc(2rem + 2vw);
+}
+h3 {
+  font-size: calc(1rem + 1vw);
+}
+
+/* Override library */
+select {
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+
+.prediction-container {
+  position: relative;
+  top: 1rem;
+  max-height: 55vh;
+
+  padding: 5vw 0;
+  border: 2px solid darkgrey;
+}
+.prediction-container[data-signal="waiting"] {
+  background-color: lightgrey;
+}
+.prediction-container[data-signal="has-signal"] {
+  background-color: lightgreen;
+}
+.prediction-container[data-signal="has-signal"] #prediction {
+  color: black;
+}
+.prediction-container[data-signal="stop"] {
+  background-color: yellow;
+}
+.prediction-container[data-signal="stop"] #prediction {
+  color: red;
+}
+
+.view-label,
+#prediction {
+  text-align: center;
+}
+
+section {
+  margin-bottom: 1em;
+}
+
+.section-content {
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 1441px) {
+  .section-content {
+    width: 980px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  .section-content {
+    width: 692px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  .section-content {
+    width: 87.5%;
+  }
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+video {
+  height: 50vh;
+  max-height: calc(100vh - var(--nav-height) - (var(--hero-mt) * 2) - var(--hero-height));
+}
+
+#capture {
+    width: 320px;
+    height: 320px;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+/* Reverse left and right */
+.mirror-mode {
+    -ms-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.fetch-demo {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  opacity: .8;
+  background-color: lightblue;
+}
+
+
+.blink {
+    -webkit-animation: blink 5s infinite both;
+            animation: blink 5s infinite both;
+}
+
+@-webkit-keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.3;
+  }
+}
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.3;
+  }
+}

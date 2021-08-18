@@ -1,20 +1,23 @@
 {
   "name": "Periscope-AI",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Manchukonda/Periscope-AI.git"
   },
+  "engines": {
+    "node": "12.12.x"
+  },
   "keywords": [],
   "author": "",
   "contributors": [
-    "Aweda Adeola",
     "Danny Kim",
     "Harish Kumar",
     "Jaiswal Felipe",
@@ -22,16 +25,15 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Manchukonda/Periscope-AI/issues"
+    "url": "https://github.com/danninemx/test-deploy-2/issues"
   },
-  "homepage": "https://github.com/Manchukonda/Periscope-AI#readme",
+  "homepage": "https://github.com/danninemx/test-deploy-2#readme",
   "dependencies": {
-    "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0",
-    "uuid": "^8.3.2"
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "eslint": "7.28.0"
   }
 }

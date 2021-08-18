@@ -1,29 +1,44 @@
-const express = require('express')
-const app = express()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
-const { v4: uuidV4 } = require('uuid')
+const express = require("express");
+const app = express();
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+let broadcaster;
+const port = process.env.PORT || 4000;
 
-app.get('/', (req, res) => {
-    res.redirect(`/${uuidV4()}`)
-})
+const http = require("http");
+const server = http.createServer(app);
 
-app.get('/:room', (req, res) => {
-    res.render('room', { roomId: req.params.room })
-})
+const io = require("socket.io")(server);
+app.use(express.static(__dirname + "/public"));
 
-io.on('connection', socket => {
-    socket.on('join-room', (roomId, userId) => {
-        socket.join(roomId)
-        socket.broadcast.to(roomId).emit('user-connected', userId)
+io.sockets.on("error", e => console.log(e));
 
-        socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId)
-        })
-    })
-})
+io.sockets.on("connection", socket => {
+  socket.on("broadcaster", (msg) => {
+    broadcaster = socket.id;
+    socket.broadcast.emit("broadcaster");
+  });
 
-server.listen(3000)
+  socket.on("watcher", () => {
+    socket.to(broadcaster).emit("watcher", socket.id);
+  });
+  socket.on("offer", (id, message) => {
+    socket.to(id).emit("offer", socket.id, message);
+  });
+  socket.on("answer", (id, message) => {
+    socket.to(id).emit("answer", socket.id, message);
+  });
+  socket.on("candidate", (id, message) => {
+    socket.to(id).emit("candidate", socket.id, message);
+  });
+
+  socket.on("test", msg => {
+    console.log('server got', msg);
+    socket.broadcast.emit("update-prediction", msg);
+  });
+
+  socket.on("disconnect", () => {
+    // socket.to(broadcaster).emit("disconnectPeer", socket.id);
+    socket.emit("disconnectPeer", socket.id);
+  });
+});
+server.listen(port, () => console.log(`Server is running on port ${port}`));
