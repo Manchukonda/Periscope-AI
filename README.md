@@ -44,14 +44,14 @@ By providing concurrent communication of the signaled messages, we can minimize 
 
 #### Usage (Banksman)
 
-1. Open `https://localhost:4000/broadcast.html` in web browser on a device with camera.
+1. Open `https://localhost:4000/broadcast.html` on a device connected to the server's network.
 2. Invite operator to open `https://localhost:4000`.
 3. Place the camera in front to capture your full upper body.
 4. Communicate signals.
 
 #### Usage (Operator)
 
-1. Open `https://localhost:4000/` in web browser on a device.
+1. Open `https://localhost:4000/` on a device connected to the server's network.
 2. Wait to connect with the banksman.
 3. Receive signals from banksman.
 
