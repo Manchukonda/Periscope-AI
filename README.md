@@ -48,4 +48,4 @@ By providing concurrent communication of the signaled messages, we can minimize 
 
 ### The Architecture
 
-![diagram](assets/architecture.svg)
+![diagram](assets/architecture.png)
