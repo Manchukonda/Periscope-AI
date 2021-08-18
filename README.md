@@ -6,7 +6,7 @@
 
 - [What is the problem?](#what-is-the-problem)
 - [How can technology help?](#how-can-technology-help)
-- [Instructions](#instructions)
+- [Instructions](#test-instructions)
 - [The Architecture](#the-architecture)
 
 ### What is the problem?
@@ -26,19 +26,34 @@ Machine learning and computer vision technologies can improve communication betw
 Our model was built to recognize and relay 4 distinct static OSHA hand signals from banksmen to operators.
 By providing concurrent communication of the signaled messages, we can minimize reliance on a clear line of sight unhindered by poor visibility, obstructions, blindspots or misinterpretation.
 
-### Instructions
+### Test Instructions
 
-#### Set up for local test
+#### Set up the application
 
-1. Clone the repository and install dependencies.
+1. Clone the repository and install dependencies in Node.
+
+   ```
+   git clone https://github.com/Manchukonda/Periscope-AI.git
+   npm install
+   ```
 
 2. Start the server.
+   ```
+   npm start
+   ```
 
-   `npm start`
+#### Usage (Banksman)
 
-3. As banksman, open `https://localhost:4000/broadcast.html` in web browser to begin broadcasting signals.
+1. Open `https://localhost:4000/broadcast.html` in web browser on a device with camera.
+2. Invite operator to open `https://localhost:4000`.
+3. Place the camera in front to capture your full upper body.
+4. Communicate signals.
 
-4. As operator, open `https://localhost:4000` in a new browser window to receive the interpreted signals.
+#### Usage (Operator)
+
+1. Open `https://localhost:4000/` in web browser on a device.
+2. Wait to connect with the banksman.
+3. Receive signals from banksman.
 
 ### Live Demo
 
