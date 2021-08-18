@@ -7,7 +7,7 @@
 - [What is the problem?](#what-is-the-problem)
 - [How can technology help?](#how-can-technology-help)
 - [Instructions](#instructions)
-- [The Architecture](#architecture)
+- [The Architecture](#the-architecture)
 
 ### What is the problem?
 
