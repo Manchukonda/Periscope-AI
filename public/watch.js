@@ -58,8 +58,11 @@ socket.on("update-prediction", (msg) => {
 })
 
 socket.on("broadcaster", (data) => {
-  console.log('fields:', data.fields);
-  console.log('values:', data.values);
+  if (!!data) {
+    console.log(data);
+    // console.log('fields:', data.fields);
+    // console.log('values:', data.values);
+  }
 
   // Unhide video if there is incoming media
   document.querySelector('video').classList.remove('visibility-hidden');

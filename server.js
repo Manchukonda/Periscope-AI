@@ -1,4 +1,4 @@
-const scaled_data = require('./mock.json').data;
+const scaled_data = JSON.stringify(require('./mock.json').data);
 
 const express = require("express");
 const app = express();
@@ -20,8 +20,7 @@ io.sockets.on("connection", socket => {
       tokenResponse,
       token,
       payload;
-    const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/5e5869da-361e-4303-9e8c-0b55053b10cb/predictions?version=2021-08-17",
-      framesPerSec = 1;
+    const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/5e5869da-361e-4303-9e8c-0b55053b10cb/predictions?version=2021-08-17";
 
     // Consider securing credentials into environment variables.
 
@@ -51,9 +50,9 @@ io.sockets.on("connection", socket => {
 
     // const arrayAnalyzer = (arr) => console.log(`width: arr[0].length; height: arr.length`)};
 
-    // const getPrediction = () => apiPost(scoring_url, tokenResponse.access_token, payload,
-    const getPrediction = () => apiPost(scoring_url, token, payload,
+    const getPrediction = () => apiPost(scoring_url, tokenResponse.access_token, payload,
       function (resp) {
+        console.log(`running getPrediction callback`);
         let parsedPostResponse;
         try {
           parsedPostResponse = JSON.parse(this.responseText);
@@ -61,13 +60,12 @@ io.sockets.on("connection", socket => {
           // TODO: handle parsing exception
           console.log(ex);
         }
-        console.log("Scoring response");
-        // console.log(parsedPostResponse);
+        console.log("\nScoring response", parsedPostResponse);
         console.log(parsedPostResponse.fields);
         console.log(parsedPostResponse.values);
 
-        // return parsedPostResponse;
-        data = { "fields": parsedPostResponse.fields, "values": parsedPostResponse.values }
+        // data = { "fields": parsedPostResponse.fields, "values": parsedPostResponse.values }
+        return parsedPostResponse
       }, function (error) {
         console.log(error);
       }
@@ -75,22 +73,25 @@ io.sockets.on("connection", socket => {
 
     // Note: Token expires every 1 hour.
     getToken((err) => console.log(err), function () {
+      console.log(`\n running getToken callback`);
       try {
-        // tokenResponse = JSON.parse(this.responseText);
-        token = JSON.parse(this.responseText).access_token;
+        tokenResponse = JSON.parse(this.responseText);
+        console.log('Received tokenResponse', tokenResponse);
       } catch (ex) {
         // TODO: handle parsing exception
       }
 
       // Values to be scored
-      payload = `{"input_data": [{"fields": [], "values": [${JSON.stringify(scaled_data)}]}]}`;
+      payload = `{"input_data": [{"fields": [], "values": [${scaled_data}]}]}`;
 
       // arrayAnalyzer();
-      getPrediction();
+      // getPrediction();
+      const framesPerSec = 1;
+      setInterval(getPrediction, (1000 / framesPerSec));
     });
 
     // Poll API once broadcaster connects
-    setInterval(getPrediction, (1000 / framesPerSec));
+    // if (typeof (tokenResponse.access_token) !== 'undefined') { // check for access token}
 
     socket.broadcast.emit("broadcaster", data);
   });
