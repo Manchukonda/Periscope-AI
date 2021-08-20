@@ -57,9 +57,11 @@ socket.on("update-prediction", (msg) => {
   document.querySelector('#prediction').textContent = `Received: ${msg}`;
 })
 
-socket.on("broadcaster", (msg) => {
+socket.on("broadcaster", (data) => {
+  console.log('fields:', data.fields);
+  console.log('values:', data.values);
 
-  // DK
+  // Unhide video if there is incoming media
   document.querySelector('video').classList.remove('visibility-hidden');
 
   socket.emit("watcher");
