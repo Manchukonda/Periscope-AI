@@ -1,3 +1,7 @@
+// DOM
+const predictionContainer = document.querySelector('.prediction-container');
+const predictionText = document.getElementById('prediction');
+
 let peerConnection;
 const config = {
   iceServers: [
@@ -42,7 +46,6 @@ socket.on("offer", (id, description) => {
   };
 });
 
-
 socket.on("candidate", (id, candidate) => {
   peerConnection
     .addIceCandidate(new RTCIceCandidate(candidate))
@@ -51,11 +54,17 @@ socket.on("candidate", (id, candidate) => {
 
 socket.on("connect", () => {
   socket.emit("watcher");
+
 });
 
-socket.on("update-prediction", (msg) => {
-  document.querySelector('#prediction').textContent = `Received: ${msg}`;
-})
+socket.on("send-prediction", (signal, isStopSignal) => {
+  console.log('watch got signal', signal);
+  predictionText.textContent = signal;
+
+  isStopSignal
+    ? predictionContainer.setAttribute('data-signal', 'stop')
+    : predictionContainer.setAttribute('data-signal', 'has-signal');
+});
 
 socket.on("broadcaster", (data) => {
   if (!!data) {

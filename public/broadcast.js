@@ -1,3 +1,9 @@
+// DOM
+const predictionContainer = document.querySelector('.prediction-container');
+const predictionText = document.getElementById('prediction');
+
+const framesPerSec = 0.35;
+
 const peerConnections = {};
 const config = {
   iceServers: [
@@ -41,6 +47,15 @@ socket.on("watcher", id => {
 
 socket.on("candidate", (id, candidate) => {
   peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
+});
+
+socket.on("send-prediction", (signal, isStopSignal) => {
+  console.log('broadcast got signal', signal);
+  predictionText.textContent = signal;
+
+  isStopSignal
+    ? predictionContainer.setAttribute('data-signal', 'stop')
+    : predictionContainer.setAttribute('data-signal', 'has-signal');
 });
 
 socket.on("disconnectPeer", id => {
@@ -122,25 +137,12 @@ function gotStream(stream) {
   videoElement.srcObject = stream;
   socket.emit("broadcaster");
 
-  // Test conversion
-  let framesPerSec = 15;
   document.querySelector('.fetch-demo--heading').textContent += ` @ ${framesPerSec} fps`;
-
-  // const captureAndFetchPrediction = async () => {
-  const test = async () => {
-    // await captureImage(imageCapture, capturedCanvas);
-    // await getPrediction();
-
-    let val = await new Date().getTime();
-    // console.log(`running test. val is ${val}`);
-    socket.emit("test", val);
-  };
 
   let imageCapture;
   const capturedCanvas = document.getElementById('capture');
   const track = stream.getVideoTracks()[0];
   imageCapture = new ImageCapture(track);
-  // const predictionText = document.getElementById('prediction');
 
   function drawCanvas(canvas, img) {
     const ctx = canvas.getContext('2d');
@@ -203,9 +205,6 @@ function gotStream(stream) {
   };
 
   setInterval(captureAndFetchPrediction, (1000 / framesPerSec));
-
-  // Broadcast testing only.
-  setInterval(test, (1000 / framesPerSec));
 }
 
 function handleError(error) {
