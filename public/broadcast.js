@@ -88,6 +88,8 @@ function gotDevices(deviceInfos) {
 }
 
 function getStream() {
+
+  // Stop any existing stream
   if (window.stream) {
     window.stream.getTracks().forEach(track => {
       track.stop();
@@ -99,7 +101,7 @@ function getStream() {
     audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
     video: {
       deviceId: videoSource ? { exact: videoSource } : undefined,
-      aspectRatio: 1,
+      // aspectRatio: 1,
       facingMode: "user"
     }
   };
@@ -145,6 +147,7 @@ function gotStream(stream) {
 
     canvas.width = getComputedStyle(canvas).width.split('px')[0];
     canvas.height = getComputedStyle(canvas).height.split('px')[0];
+
     // let ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
     let ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
     let x = (canvas.width - img.width * ratio) / 2;
@@ -153,8 +156,17 @@ function gotStream(stream) {
     ctx.drawImage(img, 0, 0, img.width, img.height,
       x, y, img.width * ratio, img.height * ratio);
 
-    // var imgPixels = ctx.getImageData(0, 0, img.Width, img.height);
-    let imgPixels = ctx.getImageData(0, 0, 320, 320);
+    // console.log(`img.width: ${img.width}; img.height: ${img.height}`);
+
+    /**
+     * @returns ImageData object. 
+     */
+    let imgPixels = ctx.getImageData(0, 0, img.width, img.height);
+    // let imgPixels = ctx.getImageData(0, 0, 320, 320);
+
+    /**
+     * Iterate through pixels;
+     */
     for (let vert = 0; vert < imgPixels.height; vert++) {
       for (let hor = 0; hor < imgPixels.width; hor++) {
         let i = (vert * 4) * imgPixels.width + hor * 4;
@@ -183,89 +195,6 @@ function gotStream(stream) {
       return
     }
   };
-
-  /* IBM API functions.
-
-  TODO: 
-  // 1. Complete the API call functions and replace getPrediction with them.
-  // 2. Consider moving them to server side.
-  // 3. Consider securing credentials into environment variables.
-
-  // NOTE: you must manually enter your API_KEY below using information retrieved from your IBM Cloud
-  const API_KEY = "7FYHxt6l5EPUVngbLrFALYZNCs-5O8GgkuMYnx6Ge-h3";
-
-  function getToken(errorCallback, loadCallback) {
-    const req = new XMLHttpRequest();
-    req.addEventListener("load", loadCallback);
-    req.addEventListener("error", errorCallback);
-    req.open("POST", "https://iam.cloud.ibm.com/identity/token");
-    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.setRequestHeader("Accept", "application/json");
-    req.send("grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=" + API_KEY);
-  }
-
-  function apiPost(scoring_url, token, payload, loadCallback, errorCallback) {
-    const oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", loadCallback);
-    oReq.addEventListener("error", errorCallback);
-    oReq.open("POST", scoring_url);
-    oReq.setRequestHeader("Accept", "application/json");
-    oReq.setRequestHeader("Authorization", "Bearer " + token);
-    oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    oReq.send(payload);
-  }
-
-  getToken((err) => console.log(err), function () {
-    let tokenResponse;
-    try {
-      tokenResponse = JSON.parse(this.responseText);
-    } catch (ex) {
-      // TODO: handle parsing exception
-    }
-
-    // NOTE: manually define and pass the array(s) of values to be scored in the next line
-    const payload = `{"input_data": [{"fields": [], "values": [${scaled_data}]}]}`;
-    const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/5e5869da-361e-4303-9e8c-0b55053b10cb/predictions?version=2021-08-17";
-
-    apiPost(scoring_url, tokenResponse.token, payload, function (resp) {
-      let parsedPostResponse;
-      try {
-        parsedPostResponse = JSON.parse(this.responseText);
-      } catch (ex) {
-        // TODO: handle parsing exception
-        console.log(ex);
-      }
-      console.log("Scoring response");
-      console.log(parsedPostResponse);
-      return parsedPostResponse;
-    }, function (error) {
-      console.log(error);
-    });
-  });
-  */
-
-
-  /*
-  // Get prediction from API
-  let priorState = '', newState = '';
-  const getPrediction = async (image) => {
-    const apiEndpoint = 'https://us-south.ml.cloud.ibm.com/ml/v4/deployments/129d9321-87f6-4f02-bed0-8430ac98f90e/predictions?version=2021-08-13';
-    try {
-      await fetch(apiEndpoint, {
-        mode: 'no-cors',
-        method: 'POST',
-        body: image
-      })
-       .then(res => {
-
-         // TODO: if a gesture is detected and confidence is high, "has-signal" and emit if no gesture is detected or confidence is low, "stop" and emit
-
-       })
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  */
 
   const captureAndFetchPrediction = async () => {
     await captureImage(imageCapture, capturedCanvas);
