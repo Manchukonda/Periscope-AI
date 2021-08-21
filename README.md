@@ -26,7 +26,7 @@ Machine learning and computer vision technologies can improve communication betw
 Our model was built to recognize and relay 4 distinct static OSHA hand signals from banksmen to operators.
 By providing concurrent communication of the signaled messages, we can minimize reliance on a clear line of sight unhindered by poor visibility, obstructions, blindspots or misinterpretation.
 
-Future contributors would make the predictions better. We hope that, in the future, we and/or more developers may connect CCTV/drone cameras; Hand Gloves with embedded sensors/VR Headsets to our web app and/or Prediction API for enhanced industrial  communication, development of self driving heavy equipments including Autonomous Cranes and Forklifts; our web app and API could enhance training of heavy industry in virtual environments, mobile games development and more solutions.
+Future contributors could make the predictions better. We hope that, in the future, we and/or more developers may connect CCTV/drone cameras; Hand Gloves with embedded sensors/VR Headsets to our web app and/or Prediction API for enhanced industrial communications, development of self driving heavy equipments including autonomous cranes and forklifts; our web app and API could enhance training of heavy industry workers in virtual environments, mobile games development and more solutions.
 ### Test Instructions
 
 #### Set up the application
