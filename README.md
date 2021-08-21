@@ -8,8 +8,9 @@
 - [How can technology help?](#how-can-technology-help)
 - [The Architecture](#the-architecture)
 - [Instructions](#test-instructions)
+- [Authors](#authors)
 
-### What is the problem?
+## What is the problem?
 
 Most accidents at worksites(construction sites, oil rig, seaports) are attributed to equipment failure caused by human error.
 This includes workers being in transportation accidents and getting struck by heavy machinery.
@@ -20,7 +21,7 @@ The National Highway Traffic Safety Administration (NHTSA) reported an estimated
 References:
 https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/811144 2. https://bruscatolaw.com/blog/who-is-at-fault-in-a-blind-spot-accident/
 
-### How can technology help?
+## How can technology help?
 
 Machine learning and computer vision technologies can improve communication between workers to reduce worksite accidents rooted in human error.
 Our model was built to recognize and relay 4 distinct static OSHA hand signals from banksmen to operators.
@@ -28,13 +29,13 @@ By providing concurrent communication of the signaled messages, we can minimize 
 
 Future contributors could make the predictions better. We hope that, in the future, we and/or more developers may connect CCTV/drone cameras; Hand Gloves with embedded sensors/VR Headsets to our web app and/or Prediction API for enhanced industrial communications, development of self driving heavy equipments including autonomous cranes and forklifts; our web app and API could enhance training of heavy industry workers in virtual environments, mobile games development and more solutions.
 
-### The Architecture
+## The Architecture
 
 ![diagram](assets/architecture.png)
 
-### Test Instructions
+## Test Instructions
 
-#### Set up the application
+### Set up the application
 
 1. Clone the repository and install dependencies in Node.
 
@@ -48,21 +49,28 @@ Future contributors could make the predictions better. We hope that, in the futu
    npm start
    ```
 
-#### Usage (Banksman)
+### Usage (Banksman)
 
 1. Open `https://localhost:4000/broadcast.html` on a device connected to the server's network.
 2. Invite operator to open `https://localhost:4000`.
 3. Place the camera in front to capture your full upper body.
 4. Communicate signals.
 
-#### Usage (Operator)
+### Usage (Operator)
 
 1. Open `https://localhost:4000/` on a device connected to the server's network.
 2. Wait to connect with the banksman.
 3. Receive signals from banksman.
 
-### Live Demo
+## Live Demo
 
 - Banksman: https://infinite-escarpment-26576.herokuapp.com/broadcast.html
 
 - Operator: https://infinite-escarpment-26576.herokuapp.com
+
+## Authors (alphabetical) <a name="authors"></a>
+
+- [Danny Kim](https://github.com/danninemx) - danny.kim@cognizant.com
+- [Chukwunonso Richard Iwenor](https://github.com/RichardTalented) - nonsoiwenor@gmail.com
+- [Harish Kumar Manchukonda](https://github.com/Manchukonda) - manchukonda.harish548@gmail.com
+- [Jaiswal Felipe](https://github.com/JaiswalFelipe) - jfprofacc@gmail.com
