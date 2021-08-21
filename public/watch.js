@@ -67,11 +67,6 @@ socket.on("send-prediction", (signal, isStopSignal) => {
 });
 
 socket.on("broadcaster", (data) => {
-  if (!!data) {
-    console.log(data);
-    // console.log('fields:', data.fields);
-    // console.log('values:', data.values);
-  }
 
   // Unhide video if there is incoming media
   document.querySelector('video').classList.remove('visibility-hidden');

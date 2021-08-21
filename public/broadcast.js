@@ -160,9 +160,7 @@ function gotStream(stream) {
     let x = (canvas.width - img.width * ratio) / 2;
     let y = (canvas.height - img.height * ratio) / 2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // ctx.drawImage(img, 0, 0, img.width, img.height,
-    //   x, y, img.width * ratio, img.height * ratio);
+    // ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * ratio, img.height * ratio);
     ctx.drawImage(img, 0, 0, 320, 320);
 
     /**
@@ -190,46 +188,16 @@ function gotStream(stream) {
     await ctx.putImageData(imgPixels, 0, 0);
     // console.log(imgPixels);
 
-    // console.log('scaledArray.length', scaledArray.length);
+    base64 = canvas.toDataURL().split('base64,')[1]; // converts to image/png:base64
 
-    // length..
-    // scaledArray = [1, 2, 3];
-    // scaledArray = Array.from(imgPixels.data); // no good
-    // scaledArray = Array(100000).fill(1); // works
-    // scaledArray = Array(200000); // doesn't work
-
-    // type..
-    // console.log(typeof scaledArray);
-    // scaledArray = JSON.stringify(scaledArray);
-    // console.log(typeof scaledArray);
-
-    scaledArray = canvas.toDataURL().split('base64,')[1]; // converts to image/png:base64
-    // console.log(`Got base64 ${scaledArray.length} chars long.`);
-    // console.log(typeof (scaledArray));
-    // console.log(scaledArray);
-
-    // Emit array for scoring
-    socket.emit("send-array", scaledArray);
-
-    // console.log('sent array');
-    // }();
-
-    // Resize grayscaled canvas
-    // canvas.width = 320;
-    // canvas.height = 320;
-    // const resized = ctx.getImageData(0, 0);
-    // console.log(resized.data);
+    // Emit string for API call
+    socket.emit("send-array", base64);
   }
 
-  // const captureAndFetchPrediction = async (capture, canvas) => {
   const captureImage = async (capture, canvas) => {
     try {
       await capture.grabFrame()
         .then(bitmap => drawCanvas(canvas, bitmap))
-
-      // TODO: Determine required image processing; return a 320 x 320 matrix.
-
-      // .then(img => getPrediction(img))
     } catch (err) {
 
       // ignore errors during async process
@@ -239,7 +207,6 @@ function gotStream(stream) {
 
   const captureAndFetchPrediction = async () => {
     await captureImage(imageCapture, capturedCanvas);
-    return
   };
 
   setInterval(captureAndFetchPrediction, (1000 / framesPerSec));
