@@ -70,7 +70,7 @@ Future contributors could make the predictions better. We hope that, in the futu
 
 ## Authors (alphabetical) <a name="authors"></a>
 
-- [Danny Kim](https://github.com/danninemx) - danny.kim@cognizant.com
-- [Chukwunonso Richard Iwenor](https://github.com/RichardTalented) - nonsoiwenor@gmail.com
-- [Harish Kumar Manchukonda](https://github.com/Manchukonda) - manchukonda.harish548@gmail.com
-- [Jaiswal Felipe](https://github.com/JaiswalFelipe) - jfprofacc@gmail.com
+- [Danny Kim](https://github.com/danninemx) <sup>[email](danny.kim@cognizant.com)</sup>
+- [Chukwunonso Richard Iwenor](https://github.com/RichardTalented) <sup>[email](nonsoiwenor@gmail.com)</sup>
+- [Harish Kumar Manchukonda](https://github.com/Manchukonda) <sup>[email](manchukonda.harish548@gmail.com)</sup>
+- [Jaiswal Felipe](https://github.com/JaiswalFelipe) <sup>[email](jfprofacc@gmail.com)</sup>
