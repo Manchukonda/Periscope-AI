@@ -44,14 +44,14 @@ updateToken();
 // Consider securing credentials into environment variables.
 function apiPost(scoring_url, IAMtoken, payload, loadCallback, errorCallback) {
   console.log(`Calling ML API..`);
-  const oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", loadCallback);
-  oReq.addEventListener("error", errorCallback);
-  oReq.open("POST", scoring_url);
-  oReq.setRequestHeader("Accept", "application/json");
-  oReq.setRequestHeader("Authorization", "Bearer " + IAMtoken);
-  oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  oReq.send(payload);
+  // const oReq = new XMLHttpRequest();
+  // oReq.addEventListener("load", loadCallback);
+  // oReq.addEventListener("error", errorCallback);
+  // oReq.open("POST", scoring_url);
+  // oReq.setRequestHeader("Accept", "application/json");
+  // oReq.setRequestHeader("Authorization", "Bearer " + IAMtoken);
+  // oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  // oReq.send(payload);
 }
 
 

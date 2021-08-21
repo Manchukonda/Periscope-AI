@@ -6,67 +6,136 @@
 
 - [What is the problem?](#what-is-the-problem)
 - [How can technology help?](#how-can-technology-help)
-- [The Architecture](#the-architecture)
+- [Demo video](#demo-video)
+- [The architecture](#the-architecture)
+- [Project roadmap](#project-roadmap)
 - [Instructions](#test-instructions)
+- [Live demo](#live-demo)
+- [Built with](#built-with)
+- [Contributing](#contributing)
 - [Authors](#authors)
+- [License](#license)
 
 ## What is the problem?
 
-Most accidents at worksites(construction sites, oil rig, seaports) are attributed to equipment failure caused by human error.
-This includes workers being in transportation accidents and getting struck by heavy machinery.
-Bureau of Labor Statistics report shows that there are annually 195,600 of such injuries in Construction alone. 10 out of every 100,000 workers are lost to fatalities even now.
-A banksman giving hand and arm signals to a crane operator, for instance, could be in grave danger simply by standing in the operator's blindspot(an area out of sight).
-The National Highway Traffic Safety Administration (NHTSA) reported an estimated 840,000 blind spot accidents occur in the United States each year, resulting in around 300 fatalities.
-(NHTSA) reported an estimated.
-References:
-https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/811144 2. https://bruscatolaw.com/blog/who-is-at-fault-in-a-blind-spot-accident/
+Most worksite accidents are attributed to equipment failure caused by human error.
+
+Construction sites, oil rigs and seaports are rife with workers who experience transportation accidents, collision with heavy machinery and more - from factors such as poor visibility, obstructions, blindspots, misoperation and simple misinterpretations.
+
+The accidents are both tragic for the victims and costly for the projects due to insurance hikes, lawsuits, delays, and loss of work.
+
+Some notable annual statistics in the U.S. are:
+
+- 200,000 injuries in construction sector alone <sup>[BLS](https://www.bls.gov/iif/soii-charts-2018.pdf)</sup>
+- Fatality for 10 out of every 100,000 workers <sup>[BLS](https://www.bls.gov/charts/census-of-fatal-occupational-injuries/number-and-rate-of-fatal-work-injuries-by-industry.htm)</sup>
+- Cost of construction injuries reported at $11.5 billion <sup>[NIH](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2491397/#:~:text=Construction%20injuries%20cost%20%2411.5%20billion,with%20days%20away%20from%20work.)<sup>
+- 840,000 blind spot accidents and 300 deaths, many involving large trucks <sup>[NHTSA](https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/811144)</sup>
 
 ## How can technology help?
 
-Machine learning and computer vision technologies can improve communication between workers to reduce worksite accidents rooted in human error.
-Our model was built to recognize and relay 4 distinct static OSHA hand signals from banksmen to operators.
-By providing concurrent communication of the signaled messages, we can minimize reliance on a clear line of sight unhindered by poor visibility, obstructions, blindspots or misinterpretation.
+Most such accidents can be prevented with watchful execution and improved communication.
 
-Future contributors could make the predictions better. We hope that, in the future, we and/or more developers may connect CCTV/drone cameras; Hand Gloves with embedded sensors/VR Headsets to our web app and/or Prediction API for enhanced industrial communications, development of self driving heavy equipments including autonomous cranes and forklifts; our web app and API could enhance training of heavy industry workers in virtual environments, mobile games development and more solutions.
+Machine learning and computer vision can provide a second set of eyes - both figuratively and literally.
+
+Tech-enabled communication between workers can reduce human error in existing means of communication. For instance, concurrent transmission of signaled messages can minimize reliance on a clear line of sight between a banksman and an operator of heavy machinery.
+
+## The idea
+
+The app supplies a heavy equipment operator with a supplementary channel of visual signals from a source such as a banksman.
+
+![data-flow-diagram](assets/data-flow.png)
+
+Once the app is set up and the personnel are situated:
+
+1. Banksman begins a video broadcast of gestures via the app
+2. App transmits snapshots of gestures to remote ML model
+3. Model provides prediction based on the images
+4. App delivers video feed and prediction to the operator
+
+## Demo video
+
+(TBA)
 
 ## The Architecture
 
-![diagram](assets/architecture.png)
+![architecture-diagram](assets/architecture.png)
 
-## Test Instructions
+## Project roadmap
+
+The project currently provides:
+
+- One-to-many live broadcast of a video stream
+- Processing and classification of static images
+- Snapshot inteval of 3-5 seconds per ML API's limitations
+- Machine Learning prediction for 4 OSHA hand gestures (Boom Up/Down; Swing Left/Right)
+
+As part of our future scope, we propose to:
+
+- Develop video classification framework for better performance
+  - Real-time measurements and predictions
+  - Motion/differential tracking
+- Add means of output
+  - Auditory (audio clip, text-to-speech)
+  - Graphical
+- Open up to pretrained models
+  - Internalized model to avoid network calls to API
+  - Custom training for ability to swap or edit model
+- Add compatibility with other data sources
+  - Mobile app
+  - Drone interface
+  - CCTV interface
+  - Public camera stream
+  - Sensor-enabled interface (e.g. glove, headset)
+- Expand applicability via training in new contexts
+  - Maritime/nautical signals (flag, light, shape)
+  - Sign languages
+  - Virtual training
+  - Self-driving protocol
+
+## Test instructions
 
 ### Set up the application
 
-1. Clone the repository and install dependencies in Node.
+1. Clone the repository and install dependencies for Node.js.
 
    ```
    git clone https://github.com/Manchukonda/Periscope-AI.git
    npm install
    ```
 
-2. Start the server.
+2. Start the server. (In localhost, default port is 4000)
    ```
    npm start
    ```
 
 ### Usage (Banksman)
 
-1. Open `https://localhost:4000/broadcast.html` on a device connected to the server's network.
-2. Invite operator to open `https://localhost:4000`.
+1. Open the app in Banksman View (e.g. `https://localhost:4000/broadcast.html`) on a device connected to the server's network.
+2. Invite operator to open the app in Operator View. (e.g. `https://localhost:4000`).
 3. Place the camera in front to capture your full upper body.
 4. Communicate signals.
 
 ### Usage (Operator)
 
-1. Open `https://localhost:4000/` on a device connected to the server's network.
+1. Open the app (e.g. `https://localhost:4000/`) on a device connected to the server's network.
 2. Wait to connect with the banksman.
 3. Receive signals from banksman.
 
-## Live Demo
+## Live demo
 
 - Banksman: https://infinite-escarpment-26576.herokuapp.com/broadcast.html
 
 - Operator: https://infinite-escarpment-26576.herokuapp.com
+
+## Built with
+
+- [Socket.io](https://socket.io/) - Peer-to-peer communication on front end
+- [IBM Watson Studio](https://cloud.ibm.com/catalog?search=watson%20machine%20learning#search_results) - Training through Machine Learning
+- [IBM Cloud Object Studio](https://cloud.ibm.com/catalog?search=cloud%20object%20storage#search_results) - Cloud storage
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors (alphabetical) <a name="authors"></a>
 
@@ -74,3 +143,7 @@ Future contributors could make the predictions better. We hope that, in the futu
 - [Danny Kim](https://github.com/danninemx) <sup>[email](mailto:danny.kim@cognizant.com)</sup>
 - [Harish Kumar Manchukonda](https://github.com/Manchukonda) <sup>[email](mailto:manchukonda.harish548@gmail.com)</sup>
 - [Jaiswal Felipe](https://github.com/JaiswalFelipe) <sup>[email](mailto:jfprofacc@gmail.com)</sup>
+
+## License
+
+This project is licensed under the Apache 2 License - see the [LICENSE](LICENSE) file for details.
