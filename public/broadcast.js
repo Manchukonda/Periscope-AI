@@ -2,7 +2,7 @@
 const predictionContainer = document.querySelector('.prediction-container');
 const predictionText = document.getElementById('prediction');
 
-const framesPerSec = 0.35;
+const framesPerSec = 0.4;
 
 const peerConnections = {};
 const config = {
@@ -209,8 +209,45 @@ function gotStream(stream) {
   };
 
   setInterval(captureAndFetchPrediction, (1000 / framesPerSec));
+  // setInterval(captureAndFetchPrediction, 5000);
 }
 
 function handleError(error) {
   console.error("Error: ", error);
 }
+
+// Event handlers
+const handleExitModal = el => {
+  if (el.contains('exit')) {
+    $('#close-modal').modal();
+  }
+}
+const handleInfoModal = el => {
+  if (el.contains('info')) {
+    $('#info-modal').modal();
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const ancestorDiv = e.target.closest('div');
+  if (ancestorDiv && ancestorDiv.hasAttribute('class')) {
+    const cl = ancestorDiv.classList;
+    handleExitModal(cl);
+    handleInfoModal(cl);
+  };
+})
+
+document.addEventListener('keypress', (e) => {
+
+  // jQuery to determine enter key
+  let keycode = (e.keyCode ? e.keyCode : e.which);
+  if (keycode == '13') {
+
+    const ancestorDiv = e.target.closest('div');
+    if (ancestorDiv && ancestorDiv.hasAttribute('class')) {
+      const cl = ancestorDiv.classList;
+      handleExitModal(cl);
+      handleInfoModal(cl);
+    }
+  }
+})
