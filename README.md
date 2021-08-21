@@ -6,8 +6,8 @@
 
 - [What is the problem?](#what-is-the-problem)
 - [How can technology help?](#how-can-technology-help)
-- [Instructions](#test-instructions)
 - [The Architecture](#the-architecture)
+- [Instructions](#test-instructions)
 
 ### What is the problem?
 
@@ -27,6 +27,11 @@ Our model was built to recognize and relay 4 distinct static OSHA hand signals f
 By providing concurrent communication of the signaled messages, we can minimize reliance on a clear line of sight unhindered by poor visibility, obstructions, blindspots or misinterpretation.
 
 Future contributors could make the predictions better. We hope that, in the future, we and/or more developers may connect CCTV/drone cameras; Hand Gloves with embedded sensors/VR Headsets to our web app and/or Prediction API for enhanced industrial communications, development of self driving heavy equipments including autonomous cranes and forklifts; our web app and API could enhance training of heavy industry workers in virtual environments, mobile games development and more solutions.
+
+### The Architecture
+
+![diagram](assets/architecture.png)
+
 ### Test Instructions
 
 #### Set up the application
@@ -61,7 +66,3 @@ Future contributors could make the predictions better. We hope that, in the futu
 - Banksman: https://infinite-escarpment-26576.herokuapp.com/broadcast.html
 
 - Operator: https://infinite-escarpment-26576.herokuapp.com
-
-### The Architecture
-
-![diagram](assets/architecture.png)
