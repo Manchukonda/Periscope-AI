@@ -2,8 +2,7 @@
 const predictionContainer = document.querySelector('.prediction-container');
 const predictionText = document.getElementById('prediction');
 
-// const framesPerSec = 0.35;
-const framesPerSec = 0.2;
+const framesPerSec = 0.35;
 
 const peerConnections = {};
 const config = {
