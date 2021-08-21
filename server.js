@@ -33,10 +33,9 @@ function getToken(errorCallback, loadCallback) {
 
 const updateToken = async () => {
   await getToken((err) => console.log(err), function () {
-    console.log(`\n running getToken callback`);
     try {
+      console.log(`\n Got new IAM token.`);
       tokenResponse = JSON.parse(this.responseText);
-      console.log('Received tokenResponse', tokenResponse);
     } catch (ex) { console.log(ex) }
   });
 }
@@ -44,6 +43,7 @@ updateToken();
 
 // Consider securing credentials into environment variables.
 function apiPost(scoring_url, IAMtoken, payload, loadCallback, errorCallback) {
+  console.log(`Calling ML API..`);
   const oReq = new XMLHttpRequest();
   oReq.addEventListener("load", loadCallback);
   oReq.addEventListener("error", errorCallback);
@@ -70,11 +70,9 @@ io.sockets.on("connection", socket => {
     const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/c22a21e5-f590-471b-9fa7-e03412b87769/predictions?version=2021-08-20";
     const getPrediction = () => apiPost(scoring_url, tokenResponse.access_token, payload,
       function (resp) {
-        // console.log('run CB for getPrediction');
-        let parsedPostResponse, values;
         try {
-          parsedPostResponse = JSON.parse(this.responseText);
-          values = parsedPostResponse.predictions[0].values;
+          let parsedPostResponse = JSON.parse(this.responseText);
+          let values = parsedPostResponse.predictions[0].values;
 
           // Sample "values": [
           //   [
@@ -94,28 +92,32 @@ io.sockets.on("connection", socket => {
               3: "Swing Left",
               4: "Swing Right"
             };
-          let maxIndex = values[0][1];
 
-          console.log('confidence', confidenceArr);
+          let maxIndex = values[0][1];
 
           if (confidenceArr[maxIndex] < confidenceThreshold) {
             maxIndex = 0;
           }
-          console.log(`maxIndex shows ${signals[maxIndex]}`);
+
+          console.log(`Detected ${signals[maxIndex]}: ${Math.round(confidenceArr[maxIndex] * 100)}%.`);
+
           socket.emit("send-prediction", signals[maxIndex], maxIndex === 0);
           socket.broadcast.emit("send-prediction", signals[maxIndex], maxIndex === 0);
+        } catch (ex) {
+          // console.log(ex);
+          console.log(`API is temporarily down. Please standby.`)
 
-        } catch (ex) { console.log(ex) }
+          // Emit API error message.
+        }
       }, function (error) { console.log(error) }
     );
 
-
     socket.on("send-array", async (arr) => {
-      console.time('getPrediction');
+      // console.time('getPrediction');
       // Note: `{"input_data": [{"fields": [], "values": ["xxxxx"]}]}`
       payload = `{"input_data": [{"fields": [], "values": ["${arr}"]}]}`;
       await getPrediction();
-      console.timeEnd('getPrediction');
+      // console.timeEnd('getPrediction');
     });
 
     socket.broadcast.emit("broadcaster");
