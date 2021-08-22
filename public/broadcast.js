@@ -2,7 +2,7 @@
 const predictionContainer = document.querySelector('.prediction-container');
 const predictionText = document.getElementById('prediction');
 
-const framesPerSec = 0.4;
+const framesPerSec = 0.28; // ~3.5 fps
 
 const peerConnections = {};
 const config = {
@@ -50,7 +50,7 @@ socket.on("candidate", (id, candidate) => {
 });
 
 socket.on("send-prediction", (signal, isStopSignal) => {
-  console.log('broadcast got signal', signal);
+  console.log('broadcaster got signal', signal);
   predictionText.textContent = signal;
 
   isStopSignal
@@ -209,7 +209,6 @@ function gotStream(stream) {
   };
 
   setInterval(captureAndFetchPrediction, (1000 / framesPerSec));
-  // setInterval(captureAndFetchPrediction, 5000);
 }
 
 function handleError(error) {
@@ -217,14 +216,21 @@ function handleError(error) {
 }
 
 // Event handlers
-const handleExitModal = el => {
-  if (el.contains('exit')) {
+const handleExitModal = cl => {
+  if (cl.contains('exit')) {
     $('#close-modal').modal();
   }
 }
-const handleInfoModal = el => {
-  if (el.contains('info')) {
+const handleInfoModal = cl => {
+  if (cl.contains('info')) {
     $('#info-modal').modal();
+  }
+}
+
+const handleOptionsModal = cl => {
+  console.log('checking options-btn in class', cl);
+  if (cl.contains('options-btn')) {
+    $('#options-modal').modal();
   }
 }
 
@@ -234,7 +240,10 @@ document.addEventListener('click', (e) => {
     const cl = ancestorDiv.classList;
     handleExitModal(cl);
     handleInfoModal(cl);
-  };
+  } else {
+    const cl = e.target.classList;
+    handleOptionsModal(cl);
+  }
 })
 
 document.addEventListener('keypress', (e) => {
@@ -242,12 +251,14 @@ document.addEventListener('keypress', (e) => {
   // jQuery to determine enter key
   let keycode = (e.keyCode ? e.keyCode : e.which);
   if (keycode == '13') {
-
+    console.log('enter key');
     const ancestorDiv = e.target.closest('div');
     if (ancestorDiv && ancestorDiv.hasAttribute('class')) {
       const cl = ancestorDiv.classList;
       handleExitModal(cl);
       handleInfoModal(cl);
+    } else {
+      handleOptionsModal(cl);
     }
   }
 })
