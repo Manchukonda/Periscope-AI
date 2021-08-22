@@ -20,6 +20,8 @@
       <div class="container-fluid text-white">
         <a
           href="https://github.com/Manchukonda/Periscope-AI/"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Visit the Periscope-AI repository"
         >
           <img class="logo px-1" src="./logo.png" alt="logo" />
@@ -63,7 +65,7 @@
     </nav>
 
     <section class="section-content prediction-container" data-signal="waiting">
-      <h2 id="prediction" class="blink">(Awaiting instructions ...)</h2>
+      <h2 id="prediction">( Awaiting your signal... )</h2>
     </section>
     <section class="video-container section-content">
       <video playsinline autoplay muted class="mirror-mode"></video>
@@ -72,7 +74,7 @@
     <section class="container">
       <button
         type="button"
-        class="btn btn-primary mx-auto d-block"
+        class="btn btn-primary mx-auto d-block options-btn"
         data-bs-toggle="modal"
         data-bs-target="#optionsModal"
       >
@@ -83,7 +85,7 @@
     <!-- Modal: Options -->
     <div
       class="modal fade"
-      id="optionsModal"
+      id="options-modal"
       tabindex="-1"
       aria-labelledby="optionsModalLabel"
       aria-hidden="true"
@@ -110,7 +112,7 @@
               <select id="videoSource"></select>
             </section>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -118,7 +120,7 @@
             >
               Close
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
