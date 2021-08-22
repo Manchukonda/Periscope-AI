@@ -71,6 +71,8 @@ The project currently provides:
 
 As part of our future scope, we propose to:
 
+- Improve browser compatibility
+  - Add getImageData fallbacks for Safari and Firefox
 - Develop video classification framework for better performance
   - Real-time measurements and predictions
   - Motion/differential tracking
