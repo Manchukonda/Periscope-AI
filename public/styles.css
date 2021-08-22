@@ -51,6 +51,13 @@ select {
   border-image: initial;
 }
 
+.info:hover {
+  cursor: pointer;
+}
+.exit:hover {
+  cursor: pointer;
+}
+
 .prediction-container {
   position: relative;
   top: 1rem;
@@ -58,9 +65,17 @@ select {
 
   padding: 5vw 0;
   border: 2px solid darkgrey;
+  border-radius: 15px;
+  box-shadow: inset 0px 3px 15px 0px #333333;
+
+  overflow: hidden;
 }
 .prediction-container[data-signal="waiting"] {
   background-color: lightgrey;
+}
+.prediction-container[data-signal="waiting"] #prediction {
+  -webkit-animation: blink 5s infinite both;
+  animation: blink 5s infinite both;
 }
 .prediction-container[data-signal="has-signal"] {
   background-color: lightgreen;
@@ -121,9 +136,8 @@ video {
   );
 }
 
-#capture {
-  /* width: 320px;
-    height: 320px; */
+.modal-content {
+  overflow: hidden;
 }
 
 .visibility-hidden {
@@ -143,13 +157,11 @@ video {
   bottom: 0;
   right: 0;
 
+  /* Can enable for testing during development */
+  display: none;
+
   opacity: 0.8;
   background-color: lightblue;
-}
-
-.blink {
-  -webkit-animation: blink 5s infinite both;
-  animation: blink 5s infinite both;
 }
 
 @-webkit-keyframes blink {
