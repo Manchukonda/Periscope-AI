@@ -125,9 +125,9 @@ As part of our future scope, we propose to:
 
 ## Live demo
 
-- Banksman: https://infinite-escarpment-26576.herokuapp.com/broadcast.html
+- Banksman: https://periscope-ai.herokuapp.com/broadcast.html
 
-- Operator: https://infinite-escarpment-26576.herokuapp.com
+- Operator: https://periscope-ai.herokuapp.com/
 
 ## Built with
 
