@@ -54,9 +54,9 @@ Once the app is set up and the personnel are situated:
 
 ## Demo video
 
-(TBA)
+[![Watch the video](assets/readme-thumb.jpg)](https://youtu.be/iWljsPrJ5f4)
 
-## The Architecture
+## The architecture
 
 ![architecture-diagram](assets/architecture.png)
 
