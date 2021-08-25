@@ -2,9 +2,11 @@
 
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-```
-NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
-```
+## SERVICE ADVISORY
+
+As of August 25, 2021, the Machine Learning model API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
+
+---
 
 ## Table of Contents
 
@@ -100,9 +102,7 @@ As part of our future scope, we propose to:
 
 ## Test instructions
 
-```
-NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
-```
+[SERVICE ADVISORY IN EFFECT](#service-advisory)
 
 ### Set up the application
 
@@ -133,9 +133,7 @@ NOTE: As of August 25, 2021, the ML API is temporarily offline for both the loca
 
 ## Live demo
 
-```
-NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
-```
+[SERVICE ADVISORY IN EFFECT](#service-advisory)
 
 - Banksman: https://periscope-ai.herokuapp.com/broadcast.html
 
