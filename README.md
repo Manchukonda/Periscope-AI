@@ -2,6 +2,10 @@
 
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
+```
+NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
+```
+
 ## Table of Contents
 
 - [What is the problem?](#what-is-the-problem)
@@ -96,6 +100,10 @@ As part of our future scope, we propose to:
 
 ## Test instructions
 
+```
+NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
+```
+
 ### Set up the application
 
 1. Clone the repository and install dependencies for Node.js.
@@ -124,6 +132,10 @@ As part of our future scope, we propose to:
 3. Receive signals from banksman.
 
 ## Live demo
+
+```
+NOTE: As of August 25, 2021, the ML API is temporarily offline for both the local test and the demo site while we redesign the service for sustainability. P2P video stream remains unaffected.
+```
 
 - Banksman: https://periscope-ai.herokuapp.com/broadcast.html
 

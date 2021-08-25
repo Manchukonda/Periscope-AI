@@ -18,8 +18,9 @@ app.use(cors({
 }));
 
 // IBM Cloud
+// TODO: Verify IBM Cloud sustainability before adding back the API_Key as environment variable.
 let tokenResponse, payload;
-const API_KEY = "7FYHxt6l5EPUVngbLrFALYZNCs-5O8GgkuMYnx6Ge-h3";
+const API_KEY = "";
 
 function getToken(errorCallback, loadCallback) {
   const req = new XMLHttpRequest();
@@ -67,7 +68,8 @@ io.sockets.on("connection", socket => {
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
 
-    const scoring_url = "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/c22a21e5-f590-471b-9fa7-e03412b87769/predictions?version=2021-08-20";
+    // TODO: Verify IBM Cloud sustainability before adding back the scoring_url as environment variable.
+    const scoring_url = "";
     const getPrediction = () => apiPost(scoring_url, tokenResponse.access_token, payload,
       function (resp) {
         try {
